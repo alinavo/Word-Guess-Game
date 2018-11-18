@@ -4,11 +4,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Hangman!</title>
+    <!-- CSS File -->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <!-- Bootstrap File -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 
 <body>
+    <!-- Overall Bootstrap Grid -->
+    <div class="container">
 
-    <h1>Hangman!</h1>
+        <!-- Jumbotron with Title -->
+        <div class="jumbotron">
+            <h1 class="text-center">
+                <strong>Hangman with Zoo Animals</strong>
+            </h1>
+            <hr>
+            <div id="music" class="text-center">
+                <button class="btn btn-warning btn-xs song-button">
+                    <span class="fa fa-play"></span> Play Song</button>
+                <button class="btn btn-dark btn-xs pause-button">
+                    <span class="fa fa-pause"></span> Pause Song</button>
+            </div>
+
+        </div>
+
+        <div class="row" class="one">
+
+            <div class="col-lg-12">
+                <p> TEXT</p>
+            </div>
+        </div>
+
+        <div class="row" class="two">
+
+            <div class="col-lg-12">
+                <p> TEXT</p>
+            </div>
+        </div>
+        <div class="row" class="three">
+
+            <div class="col-lg-12">
+                <p> TEXT</p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
 
 
     <p>
@@ -22,66 +69,79 @@
 
 
     <script>
-        // array of zoo animals
-        var zooAnimals = [
-            "elephant",
-            "zebra",
-            "monkey",
-            "giraffe",
-            "lion",
-            "bear",
-            "kangaroo"
-        ]
+        $(document).ready(function () {
 
-        //variables
-        var userGuess; //user's guess
-        var rightLetters; //correct letters guessed
-        var wrongLetters = []; //holds incorrect letters guessed
+            //Theme Song
+            var audioElement = document.createElement("audio");
+            audioElement.setAttribute("src", "assets/roarkatyperry.mp3");
 
-        //counter variables
-        var guessesLeft = 10; //number of guesses
-        var lives = 3; //game lives to use of 3
-        var wins = 0; //game starting score of 0
+            // Theme Button
+            $(".song-button").on("click", function () {
+                audioElement.play();
+            });
+            $(".pause-button").on("click", function () {
+                audioElement.pause();
+            });
 
-        document.getElementById("guessesLeft").innerHTML = guessesLeft; //number of guesses shown in HTML
-        document.getElementById("lives").innerHTML = lives;  //puts lives in HTML
-        document.getElementById("wins").innerHTML = wins; //puts wins in HTML
+            // array of zoo animals
+            var zooAnimals = [
+                "elephant",
+                "zebra",
+                "monkey",
+                "giraffe",
+                "lion",
+                "bear",
+                "kangaroo"
+            ]
 
-        //asks javascript picks random word
+            //variables
+            var userGuess; //user's guess
+            var rightLetters; //correct letters guessed
+            var wrongLetters = []; //holds incorrect letters guessed
 
-        function startGame() {
-            var word = zooAnimals[Math.floor(Math.random() * zooAnimals.length)];
+            //counter variables
+            var guessesLeft = 10; //number of guesses
+            var lives = 3; //game lives to use of 3
+            var wins = 0; //game starting score of 0
 
-            // Set up the solution 
-            var letters = []; //letters in word
-            for (var i = 0; i < word.length; i++) {
-                letters[i] = "__"; //replaces letters with underscores 
+            document.getElementById("guessesLeft").innerHTML = guessesLeft; //number of guesses shown in HTML
+            document.getElementById("lives").innerHTML = lives;  //puts lives in HTML
+            document.getElementById("wins").innerHTML = wins; //puts wins in HTML
+
+            //asks javascript picks random word
+
+            function startGame() {
+                var word = zooAnimals[Math.floor(Math.random() * zooAnimals.length)];
+
+                // Set up the solution 
+                var letters = []; //letters in word
+                for (var i = 0; i < word.length; i++) {
+                    letters[i] = "__"; //replaces letters with underscores 
+                };
+                document.getElementById("solution").innerHTML = letters.join(" "); //eliminates comma in array on display in HTML
+
             };
-            document.getElementById("solution").innerHTML = letters.join(" "); //eliminates comma in array on display in HTML
 
-        };
+            document.onkeyup = function (event) {
+                var userGuess = event.key;
 
-        document.onkeyup = function (event) {
-            var userGuess = event.key;
+                while (guessesLeft > 0) {
 
-            while (guessesLeft > 0) {
-
-                for (var j = 0; j < word.length; j++) {
-                    if (word[j] === userGuess ) 
-                    {
-                        letters[j] = userGuess;
+                    for (var j = 0; j < word.length; j++) {
+                        if (word[j] === userGuess) {
+                            letters[j] = userGuess;
+                        }
+                        else {
+                            guessesLeft--;
+                        }
                     }
-                    else {
-                        guessesLeft--;
-                    }
+
                 }
+            };
 
-            }
-        };
+            startGame();
 
-        startGame();
-
-
+        });
     </script>
 </body>
 
