@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hangman!</title>
+</head>
+
+<body>
+
+    <h1>Hangman!</h1>
+
+
+    <p>
+        <h2><span id="solution"></span></h2>
+    </p>
+    <p>Guesses Left: <span id="guessesLeft"></span></p>
+    <p>Lives: <span id="lives"></span></p>
+    <p id="wrongLetters"></p>
+    <p>Wins: <span id="wins"></span></p>
+
+
+
+    <script>
+        // array of zoo animals
+        var zooAnimals = [
+            "elephant",
+            "zebra",
+            "monkey",
+            "giraffe",
+            "lion",
+            "bear",
+            "kangaroo"
+        ]
+
+        //variables
+        var userGuess; //user's guess
+        var rightLetters; //correct letters guessed
+        var wrongLetters = []; //holds incorrect letters guessed
+
+        //counter variables
+        var guessesLeft = 10; //number of guesses
+        var lives = 3; //game lives to use of 3
+        var wins = 0; //game starting score of 0
+
+        document.getElementById("guessesLeft").innerHTML = guessesLeft; //number of guesses shown in HTML
+        document.getElementById("lives").innerHTML = lives;  //puts lives in HTML
+        document.getElementById("wins").innerHTML = wins; //puts wins in HTML
+
+        //asks javascript picks random word
+
+        function startGame() {
+            var word = zooAnimals[Math.floor(Math.random() * zooAnimals.length)];
+
+            // Set up the solution 
+            var letters = []; //letters in word
+            for (var i = 0; i < word.length; i++) {
+                letters[i] = "__"; //replaces letters with underscores 
+            };
+            document.getElementById("solution").innerHTML = letters.join(" "); //eliminates comma in array on display in HTML
+
+        };
+
+        document.onkeyup = function (event) {
+            var userGuess = event.key;
+
+            while (guessesLeft > 0) {
+
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === userGuess ) 
+                    {
+                        letters[j] = userGuess;
+                    }
+                    else {
+                        guessesLeft--;
+                    }
+                }
+
+            }
+        };
+
+        startGame();
+
+
+    </script>
+</body>
+
+</html>
