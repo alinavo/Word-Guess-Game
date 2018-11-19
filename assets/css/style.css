@@ -1,9 +1,44 @@
 
+
 body { 
-    background-image: url("Word-Guess-Game/assets/images/leopard.jpg");
+    background-image: url(Word-Guess-Game/assets/images/wallpaper.JPG);
     height: 100%; 
-    width: 100%;
+    width: 100%;   
+    font-size: 30px;
+
 }
 
 
 
+.jumbotron {
+    font-family: 'Kenia', cursive;
+    font-size: 80px;
+}
+
+#music {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+#one {
+
+}
+
+#two {
+    font-size: 40px;
+    font-style: bold;
+    text-align: center;
+}
+
+#three {
+
+    text-align: center;
+    padding-top: 30px;
+
+}
+
+.row {
+    
+}
