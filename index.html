@@ -10,9 +10,11 @@
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Google Font-->
-    <link href="https://fonts.googleapis.com/css?family=Kenia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Life+Savers" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pompiere" rel="stylesheet">
     <!-- CSS File -->
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
 
 </head>
 
@@ -39,157 +41,159 @@
             </div>
         </div>
 
-
-            <div class="row">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-6" id="one">
-                    <p class="text-center"> HOW TO PLAY:
-                        <ol>
-                            <li>press any letter to start</li>
-                            <li>guess the word</li>
-                            <li>play until you run out of guesses</li>
-                            <li>have fun!</li>
-                        </ol>
-                    </p>
-                </div>
-                <div class="col-lg-3"></div>
+        <!-- Instructions -->
+        <div class="row">
+            <div class="col-lg-3" ></div>
+            <div class="col-lg-6" id="one">
+                <p class="text-center"> HOW TO PLAY:
+                    <ol>
+                        <li>press any letter to start</li>
+                        <li>guess the word</li>
+                        <li>play until you run out of guesses</li>
+                        <li>have fun!</li>
+                    </ol>
+                </p>
             </div>
+            <div class="col-lg-3"></div>
+        </div>
 
-            <div class="row">
+        <!-- Random Word -->
+        <div class="row">
 
-                <div class="col-lg-12" id="two">
-                    <p>
-                        <span id="solution"></span>
-                    </p>
+            <div class="col-lg-12" id="two">
+                <p>
+                    <span id="solution"></span>
+                </p>
 
-                </div>
             </div>
-            <div class="row">
+        </div>
 
-                <div class="col-lg-6" id="three">
-                    <p>Guesses Left: <span id="guessesLeft"></span></p>
-                    <p>Remaining Lives: <span id="lives"></span></p>
-                    <p id="wrongLetters"></p>
-                    <p>Games Won: <span id="wins"></span></p>
-                </div>
-                <div class="col-lg-6" id="three">
-                    <p>Letters Guessed: <span id="wrongLetters"></span></p>
-                </div>
+        <!-- Game Data -->
+        <div class="row">
+
+            <div class="col-lg-6" id="three">
+                <p>Guesses Left: <span id="guessesLeft"></span></p>
+                <p>Remaining Lives: <span id="lives"></span></p>
+                <p id="wrongLetters"></p>
+                <p>Games Won: <span id="wins"></span></p>
             </div>
-
-
+            <div class="col-lg-6" id="three">
+                <p>Letters Guessed: <span id="wrongLetters"></span></p>
+            </div>
         </div>
 
 
+    </div>
 
 
 
 
 
-        <script>
-            $(document).ready(function () {
-
-                //Theme Song
-                var audioElement = document.createElement("audio");
-                audioElement.setAttribute("src", "assets/roarkatyperry.mp3");
-
-                // Theme Button
-                $(".song-button").on("click", function () {
-                    audioElement.play();
-                });
-                $(".pause-button").on("click", function () {
-                    audioElement.pause();
-                });
-
-                // array of zoo animals
-                var zooAnimals = [
-                    "elephant",
-                    "zebra",
-                    "monkey",
-                    "giraffe",
-                    "lion",
-                    "bear",
-                    "kangaroo"
-                ]
-
-                //variables
-                var userGuess; //user's guess
-                var rightLetters; //correct letters guessed
-                var wrongLetters = []; //holds incorrect letters guessed
-
-                //counter variables
-                var guessesLeft = 10; //number of guesses
-                var lives = 3; //game lives to use of 3
-                var wins = 0; //game starting score of 0
-
-                document.getElementById("guessesLeft").innerHTML = guessesLeft; //number of guesses shown in HTML
-                document.getElementById("lives").innerHTML = lives;  //puts lives in HTML
-                document.getElementById("wins").innerHTML = wins; //puts wins in HTML
-
-                //asks javascript picks random word
 
 
-                var word = zooAnimals[Math.floor(Math.random() * zooAnimals.length)];
+    <script>
+        $(document).ready(function () {
 
-                // Set up the solution 
+            //Theme Song
+            var audioElement = document.createElement("audio");
+            audioElement.setAttribute("src", "assets/roarkatyperry.mp3");
 
-                var letters = []; //letters in word
-                for (var i = 0; i < word.length; i++) {
-                    letters[i] = "__"; //replaces letters with underscores 
-                };
-                document.getElementById("solution").innerHTML = letters.join(" "); //eliminates comma in array on display in HTML
+            // Theme Button
+            $(".song-button").on("click", function () {
+                audioElement.play();
+            });
+            $(".pause-button").on("click", function () {
+                audioElement.pause();
+            });
+
+            // array of zoo animals
+            var zooAnimals = [
+                "elephant",
+                "zebra",
+                "monkey",
+                "giraffe",
+                "lion",
+                "bear",
+                "kangaroo"
+            ]
+
+            //variables
+            var userGuess; //user's guess
+            var rightLetters; //correct letters guessed
+            var wrongLetters = []; //holds incorrect letters guessed
+
+            //counter variables
+            var guessesLeft = 10; //number of guesses
+            var lives = 3; //game lives to use of 3
+            var wins = 0; //game starting score of 0
+
+            document.getElementById("guessesLeft").innerHTML = guessesLeft; //number of guesses shown in HTML
+            document.getElementById("lives").innerHTML = lives;  //puts lives in HTML
+            document.getElementById("wins").innerHTML = wins; //puts wins in HTML
+
+            //asks javascript picks random word
 
 
- // a function that checks everything after the onkeyup event   
- function checkWord(){
-           console.log("entering checkWord function");           
-           var solution = letters.join("");
-           // check if the guess matches the word, if it is restart the values and increase the win
-           if(word == solution){
-            console.log("match! restart everything")
-            wins++
-            document.getElementById("wins").innerHTML = wins;
-            document.getElementById("guessesLeft").innerHTML = 10;
-            guessesLeft = 10;
-            letters = [];
-            startGame();            
-           }
-           // check if guessesLeft is out. If it is, lower the lives and restart the game.
-           else if(guessesLeft == 0 ){
-                lives--;
-                document.getElementById("lives").innerHTML = lives;
-                document.getElementById("guessesLeft").innerHTML = 10;
-                guessesLeft = 10;
-                startGame();
-           }
-           // check if lives is at 0. If it is, the game is over 
-           else if(lives == 0 ){
-            alert("game over!");
-           }
-       }
-           
-           // call onkeyup event when a key is press.
-           document.onkeyup = function (event) {
-               var userGuess = event.key;
-               if (guessesLeft > 0) {
-                   for (var j = 0; j < word.length; j++) {
-                       if (word[j] === userGuess) {                        
-                           letters[j] = userGuess;
-                           document.getElementById("solution").innerHTML = letters.join(" ")                     
-                       }                           
-                   }                 
-               }               
-               //update counter and call checkWord Function  
-               guessesLeft--;
-               document.getElementById("guessesLeft").innerHTML = guessesLeft;       
-               checkWord();
-           };
-           startGame();
-       
-       });
-       
-   </script>
+            var word = zooAnimals[Math.floor(Math.random() * zooAnimals.length)];
+
+            // Set up the solution 
+
+            var letters = []; //letters in word
+            for (var i = 0; i < word.length; i++) {
+                letters[i] = "__"; //replaces letters with underscores 
+            };
+            document.getElementById("solution").innerHTML = letters.join(" "); //eliminates comma in array on display in HTML
+
+
+            // a function that checks everything after the onkeyup event   
+            function checkWord() {
+                var solution = letters.join("");
+                // check if the guess matches the word, if it is restart the values and increase the win
+                if (word == solution) {
+                    wins++
+                    document.getElementById("wins").innerHTML = wins;
+                    document.getElementById("guessesLeft").innerHTML = 10;
+                    guessesLeft = 10;
+                    letters = [];
+                    startGame();
+                }
+                // check if guessesLeft is out. If it is, lower the lives and restart the game.
+                else if (guessesLeft == 0) {
+                    lives--;
+                    document.getElementById("lives").innerHTML = lives;
+                    document.getElementById("guessesLeft").innerHTML = 10;
+                    guessesLeft = 10;
+                    startGame();
+                }
+                // check if lives is at 0. If it is, the game is over 
+                else if (lives == 0) {
+                    alert("game over!");
+                }
+            }
+
+            // call onkeyup event when a key is press.
+            document.onkeyup = function (event) {
+                var userGuess = event.key;
+                if (guessesLeft > 0) {
+                    for (var j = 0; j < word.length; j++) {
+                        if (word[j] === userGuess) {
+                            letters[j] = userGuess;
+                            document.getElementById("solution").innerHTML = letters.join(" ")
+                        }
+                        
+
+                    }
+                
+                }
+                //update counter and call checkWord Function  
+                guessesLeft--;
+                document.getElementById("guessesLeft").innerHTML = guessesLeft;
+                checkWord();
+            };
+            startGame();
+
+        });
+
+    </script>
 </body>
-
 </html>
-
