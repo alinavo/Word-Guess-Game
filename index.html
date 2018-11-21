@@ -25,7 +25,7 @@
         <!-- Jumbotron with Title -->
         <div class="jumbotron">
             <p class="text-center">
-                <strong>Zoo Animal Hangman</strong>
+                <strong>let's get wiiiilllddddd</strong>
             </p>
         </div>
 
@@ -43,7 +43,7 @@
 
         <!-- Instructions -->
         <div class="row">
-            <div class="col-lg-3" ></div>
+            <div class="col-lg-3"></div>
             <div class="col-lg-6" id="one">
                 <p class="text-center"> HOW TO PLAY:
                     <ol>
@@ -74,11 +74,11 @@
             <div class="col-lg-6" id="three">
                 <p>Guesses Left: <span id="guessesLeft"></span></p>
                 <p>Remaining Lives: <span id="lives"></span></p>
-                <p id="wrongLetters"></p>
                 <p>Games Won: <span id="wins"></span></p>
             </div>
             <div class="col-lg-6" id="three">
-                <p>Letters Guessed: <span id="wrongLetters"></span></p>
+                <p>Letters Guessed: </p>
+                <p><span id="wrongLetters"></span></p>
             </div>
         </div>
 
@@ -150,6 +150,7 @@
                 var solution = letters.join("");
                 // check if the guess matches the word, if it is restart the values and increase the win
                 if (word == solution) {
+                    alert("you win!");
                     wins++
                     document.getElementById("wins").innerHTML = wins;
                     document.getElementById("guessesLeft").innerHTML = 10;
@@ -159,6 +160,7 @@
                 }
                 // check if guessesLeft is out. If it is, lower the lives and restart the game.
                 else if (guessesLeft == 0) {
+                    alert("you lose!");
                     lives--;
                     document.getElementById("lives").innerHTML = lives;
                     document.getElementById("guessesLeft").innerHTML = 10;
@@ -174,16 +176,26 @@
             // call onkeyup event when a key is press.
             document.onkeyup = function (event) {
                 var userGuess = event.key;
+                var notFound = false;
                 if (guessesLeft > 0) {
                     for (var j = 0; j < word.length; j++) {
                         if (word[j] === userGuess) {
                             letters[j] = userGuess;
-                            document.getElementById("solution").innerHTML = letters.join(" ")
+                            document.getElementById("solution").innerHTML = letters.join(" ");
                         }
-                        
-
+                        else {
+                            notFound = true;
+                            
+                        }
+                    };
+                    if (notFound = true) {
+                        // wrongLetters[j] = userGuess;
+                        wrongLetters.push(userGuess)
+                        document.getElementById("wrongLetters").innerHTML = wrongLetters.join(" ");
                     }
-                
+
+
+
                 }
                 //update counter and call checkWord Function  
                 guessesLeft--;
@@ -195,5 +207,6 @@
         });
 
     </script>
-</body>
+</body> 
+
 </html>

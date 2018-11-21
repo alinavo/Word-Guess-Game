@@ -1,11 +1,13 @@
 
 
 body { 
-    background-image: url("assets/images/wallpaper.jpg");
+    background-image: url("../images/wallpaper.jpg");
     height: 100%; 
     width: 100%;   
     font-size: 30px;
     font-family: 'Pompiere';
+
+    font-style: bold;
 
 }
 
@@ -14,7 +16,8 @@ body {
 .jumbotron {
     font-family: 'Life Savers';
     font-size: 80px;
-
+   background-color: transparent;
+   color: white;
 }
 
 #music {
@@ -26,14 +29,18 @@ body {
 
 #one {
     border-style: dotted;
-
+    background-color: white;
+    margin: 20px;
+    padding-top: 10px;
 }
 
 #two {
     font-size: 60px;
     font-style: bold;
     text-align: center;
-    padding: 50px;
+    background-color: white;
+    margin: 20px;
+    border-style: dotted;
 
 }
 
@@ -42,6 +49,8 @@ body {
     text-align: center;
     padding-top: 30px;
     border-style: dotted;
+    background-color: white;
+
 
 }
 
